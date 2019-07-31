@@ -1,0 +1,21 @@
+# ignore a file type
+*.sqlite
+*.csv
+*.pyc
+*.pcap
+*.log
+*.rar
+
+# ignore a single file
+
+# ignore an entire directory
+.idea/
+__pycache__/
+venv/
+.vagrant/
+eda_results/
+wild_results/
+build/
+logs/
+pcaps/
+

@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  
+  config.vm.box = "ubuntu/xenial64"
+  config.disksize.size = '20GB'
+
+  config.vm.network "forwarded_port", guest: 5000, host: 5000
+
+  config.vm.define "vm-p4sec" do |node|
+  end
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.name = "FrameRTP4 VM" + Time.now.strftime(" %Y-%m-%d")
+    vb.memory = 8192
+    vb.cpus = 4
+  end
+  
+  config.vm.synced_folder '../framertp4/', '/srv/framertp4'  
+  config.vm.synced_folder '../virtual-topology/', '/srv/virtual-topology'
+  config.vm.synced_folder '../p4-extensions/', '/srv/p4-extensions'
+  config.vm.synced_folder '.', '/vagrant', disabled: true  
+  config.vm.hostname = "p4sec-vm"
+  config.vm.provision "file", source: "p4.vim", destination: "/home/vagrant/p4.vim"
+  config.vm.provision "shell", path: "root-bootstrap.sh"
+  config.vm.provision "shell", privileged: false, path: "user-bootstrap.sh"
+
+end
