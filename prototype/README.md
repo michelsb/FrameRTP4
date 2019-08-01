@@ -1,4 +1,4 @@
-# SFCMon
+# FrameRTP4 Prototype
 
 ## Introduction
 
